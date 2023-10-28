@@ -13,18 +13,18 @@ public class ProcessUserRequestImpl implements ProcessUserRequest{
     Display display = new Display();
 
     @Override
-    public void processUserRequestWithParam(String action, String fileName) {
+    public void processUserRequestWithParam(String action, String fileName) throws Exception {
         FileClass fc = fco.processFile(fileName);
 
         int c = 0;
 
-        if(action=="-c"){
+        if(action!=null && action=="-c"){
             display.display(Integer.toString(wco.countBytes(fc)), fileName);
-        }else if(action=="-l"){
+        }else if(action!=null && action=="-l"){
             display.display(Integer.toString(wco.countLines(fc)), fileName);
-        }else if(action=="-w"){
+        }else if(action!=null && action=="-w"){
             display.display(Integer.toString(wco.countWords(fc)), fileName);
-        }else if(action=="-m"){
+        }else if(action!=null && action=="-m"){
             display.display(Integer.toString(wco.countCharacters(fc)), fileName);
         }else{
             display.display(Integer.toString(wco.countBytes(fc)),Integer.toString(wco.countLines(fc)),

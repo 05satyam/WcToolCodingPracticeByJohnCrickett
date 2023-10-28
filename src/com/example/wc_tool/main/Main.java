@@ -2,33 +2,52 @@ package com.example.wc_tool.main;
 
 import com.example.wc_tool.factory.ProcessUserRequest;
 import com.example.wc_tool.factory.ProcessUserRequestImpl;
+import com.example.wc_tool.objects.Display;
 
 public class Main {
     static ProcessUserRequest purq = new ProcessUserRequestImpl();
-
+    static Display display = new Display();
     public static void main(String[] args){
-        if(args.length<1){
-            //error point
-            return ;//with a message
+
+        try {
+            validateRequestParams(args);
+        }catch(Exception e){
+
+          display.display(e.getMessage());
+            return;
+        }
+        String action = args[0];
+        String fileName = args[1];
+        try {
+            purq.processUserRequestWithParam(action, fileName);
+
+            /**
+             * this is the 3rd case to implement--step 7 handling needs to be done
+             if()
+             **/
+        }catch (Exception e){
+            display.display(e.getMessage());
+            return;
         }
 
-        if(args.length==2){
-            /**
-             * 1. check whether you have file name or not
-             * 2. check
-             */
-            String action = args[0];
-            String fileName = args[1];
-            purq.processUserRequestWithParam(args[0],args[1]);
+
+    }
+
+    public static void validateRequestParams(String[] args) throws Exception {
+        //handle below cases:
+        if(args==null)
+            throw new Exception();
+
+        if(args.length<1){
+            throw new Exception();
         }
-        if(args.length==3){
-            //prcoess the request
-            String fileName = args[0];
-            purq.processUserRequestWithParam(null, fileName);
+
+        String action = args[0];
+        String fileName = args[1];
+
+        if(action==null && fileName==null){
+            throw new Exception();
         }
-        /**
-         * this is the 3rd case to implement
-        if()
-         **/
+
     }
 }

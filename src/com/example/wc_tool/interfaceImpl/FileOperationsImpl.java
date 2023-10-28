@@ -5,12 +5,13 @@ import com.example.wc_tool.objects.FileClass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class FileOperationsImpl implements FileOperations {
 
     @Override
-    public FileClass processFile(String fileName) {
+    public FileClass processFile(String fileName) throws FileNotFoundException, IOException, Exception {
         File file = new File(fileName);
 
         int lineCount = 0;
