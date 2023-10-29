@@ -4,11 +4,8 @@ import com.example.wc_tool.interfaceImpl.FileOperationsImpl;
 import com.example.wc_tool.interfaceImpl.WcToolOperationsImpl;
 import com.example.wc_tool.interfaces.FileOperations;
 import com.example.wc_tool.interfaces.WcToolOperations;
-import com.example.wc_tool.objects.Display;
-import com.example.wc_tool.objects.FileClass;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import com.example.wc_tool.utils.Display;
+import com.example.wc_tool.utils.FileClass;
 
 /**
  * implemenation class of ProcessUserRequest
@@ -17,7 +14,6 @@ import java.nio.file.Paths;
 public class ProcessUserRequestImpl implements ProcessUserRequest{
     FileOperations fco = new FileOperationsImpl();
     WcToolOperations wco = new WcToolOperationsImpl();
-    Display display = new Display();
 
     /**
      *
@@ -33,19 +29,21 @@ public class ProcessUserRequestImpl implements ProcessUserRequest{
     public void processUserRequestWithParam(String action, String fileName) throws Exception {
 
         FileClass fc = fco.processFile(fileName);
-        String fileNameToDisplay = fco.getFileNameFromGivenPath(fileName);
-
-        if(fco.validateFileName(fileNameToDisplay)) {
+        String fileNameToDisplay=null;
+        if(fileName!=null)
+            fileNameToDisplay = fco.getFileNameFromGivenPath(fileName);
+        //System.out.println(fileNameToDisplay);
+        if(fc!=null) {
             if (action != null && action.equalsIgnoreCase("-c")) {
-                display.display(Long.toString(wco.countBytes(fc)), fileNameToDisplay);
+                Display.display(Long.toString(wco.countBytes(fc)), fileNameToDisplay);
             } else if (action != null && action.equalsIgnoreCase("-l")) {
-                display.display(Long.toString(wco.countLines(fc)), fileNameToDisplay);
+                Display.display(Long.toString(wco.countLines(fc)), fileNameToDisplay);
             } else if (action != null && action.equalsIgnoreCase("-w")) {
-                display.display(Long.toString(wco.countWords(fc)), fileNameToDisplay);
+                Display.display(Long.toString(wco.countWords(fc)), fileNameToDisplay);
             } else if (action != null && action.equalsIgnoreCase("-m")) {
-                display.display(Long.toString(wco.countCharacters(fc)), fileNameToDisplay);
+                Display.display(Long.toString(wco.countCharacters(fc)), fileNameToDisplay);
             } else {
-                display.display(Long.toString(wco.countBytes(fc)), Long.toString(wco.countLines(fc)),
+                Display.display(Long.toString(wco.countBytes(fc)), Long.toString(wco.countLines(fc)),
                         Long.toString(wco.countWords(fc)), fileNameToDisplay);
             }
         }

@@ -1,8 +1,7 @@
 package com.example.wc_tool.interfaceImpl;
 
-import com.example.wc_tool.factory.ProcessUserRequest;
 import com.example.wc_tool.interfaces.WcToolOperations;
-import com.example.wc_tool.objects.FileClass;
+import com.example.wc_tool.utils.FileClass;
 
 /**
  * this is an implemetation of WC tool interface class which is designed to separate the functionlity of WC tool.

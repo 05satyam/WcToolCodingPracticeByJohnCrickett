@@ -1,12 +1,11 @@
 package com.example.wc_tool.interfaceImpl;
 
 import com.example.wc_tool.interfaces.FileOperations;
-import com.example.wc_tool.objects.FileClass;
+import com.example.wc_tool.utils.FileClass;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class FileOperationsImpl implements FileOperations {
 
@@ -23,42 +22,45 @@ public class FileOperationsImpl implements FileOperations {
      */
     @Override
     public FileClass processFile(String fileName) throws FileNotFoundException, IOException, Exception {
-        File file = new File(fileName);
+        //File file = new File(fileName);
 
         long lineCount = 0;
         int wordCount = 0;
-        long byteCount = file.length();
+        long byteCount = 0;
         int charCount = 0;
 
-        Scanner scanner = new Scanner(file);
-        while(scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                lineCount++;
-                charCount += line.length();
-                if(!line.isEmpty()) {
-                    String[] words = line.split("\\s+");
-                    for (String word : words) {
-                        if (!word.trim().isEmpty()) {
-                            wordCount++;
-                        }
+        //Scanner scanner = new Scanner(file);
+        BufferedReader reader = (fileName == null)? new BufferedReader(new InputStreamReader(System.in))
+                :   new BufferedReader(new FileReader(fileName));
+//        while(scanner.hasNextLine()) {
+//                String line = scanner.nextLine();
+//                lineCount++;
+//                charCount += line.length();
+//                if(!line.isEmpty()) {
+//                    String[] words = line.split("\\s+");
+//                    for (String word : words) {
+//                        if (!word.trim().isEmpty()) {
+//                            wordCount++;
+//                        }
+//                    }
+//                }
+//        }
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            lineCount++;
+            charCount += line.length();
+            byteCount += line.getBytes().length;
+            if (!line.isEmpty()) {
+                String[] words = line.split("\\s+");
+                for (String word : words) {
+                    if (!word.trim().isEmpty()) {
+                        wordCount++;
                     }
                 }
+            }
         }
-
-//        BufferedReader br = new BufferedReader(new FileReader(fileName));
-//        String line;
-//        while ((line = br.readLine()) != null) {
-//                // Trim the line to remove leading and trailing whitespace
-//                // and then check if it's empty
-//            if (!line.trim().isEmpty()) {
-//                // Process the line
-//                byteCount += line.getBytes().length; // Count bytes for the line
-//                charCount += line.length(); // Count characters for the line
-//                lineCount++;
-//                wordCount += line.split("\\s+").length; // Split line into words and count them
-//                }
-//            }
-        return new FileClass(fileName, byteCount,charCount,wordCount,lineCount-1);
+        return new FileClass(fileName, byteCount, charCount, wordCount, lineCount - 1);
     }
 
 

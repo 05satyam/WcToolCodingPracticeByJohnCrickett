@@ -1,4 +1,4 @@
-package com.example.wc_tool.objects;
+package com.example.wc_tool.utils;
 
 /**
  * Object class for file which is designed to containe the details related to a file
