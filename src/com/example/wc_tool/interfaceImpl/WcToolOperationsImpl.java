@@ -4,24 +4,30 @@ import com.example.wc_tool.factory.ProcessUserRequest;
 import com.example.wc_tool.interfaces.WcToolOperations;
 import com.example.wc_tool.objects.FileClass;
 
+/**
+ * this is an implemetation of WC tool interface class which is designed to separate the functionlity of WC tool.
+ * If in future ssomne tool specific features needs to be modified before returning results to user
+ * we can change here
+ * the functions designed are dedicated to separate action done by WC tool.
+ */
 public class WcToolOperationsImpl implements WcToolOperations {
     @Override
-    public int countBytes(FileClass fc) {
+    public long countBytes(FileClass fc) {
         return fc.getNumberOfBytes();
     }
 
     @Override
-    public int countLines(FileClass fc) {
+    public long countLines(FileClass fc) {
        return fc.getNumberOfLines();
     }
 
     @Override
-    public int countWords(FileClass fc) {
+    public long countWords(FileClass fc) {
        return fc.getNumberOfWords();
     }
 
     @Override
-    public int countCharacters(FileClass fc) {
+    public long countCharacters(FileClass fc) {
        return fc.getNumberOfCharacters();
     }
 

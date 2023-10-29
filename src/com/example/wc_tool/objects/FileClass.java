@@ -1,15 +1,18 @@
 package com.example.wc_tool.objects;
 
+/**
+ * Object class for file which is designed to containe the details related to a file
+ */
 public class FileClass {
     String fileName;
-    int numberOfLines;
-    int numberOfWords;
-    int numberOfBytes;
-    int numberOfCharacters;
+    long numberOfLines;
+    long numberOfWords;
+    long numberOfBytes;
+    long numberOfCharacters;
 
     FileClass(){/* deafult constructor*/}
 
-    public FileClass(String fileName, int numberOfBytes, int numberOfCharacters, int numberOfWords, int numberOfLines){
+    public FileClass(String fileName, long numberOfBytes, long numberOfCharacters, long numberOfWords, long numberOfLines){
         this.fileName=fileName;
         this.numberOfLines=numberOfLines;
         this.numberOfBytes=numberOfBytes;
@@ -21,19 +24,19 @@ public class FileClass {
         return fileName;
     }
 
-    public int getNumberOfLines() {
+    public long getNumberOfLines() {
         return numberOfLines;
     }
 
-    public int getNumberOfWords() {
+    public long getNumberOfWords() {
         return numberOfWords;
     }
 
-    public int getNumberOfBytes() {
+    public long getNumberOfBytes() {
         return numberOfBytes;
     }
 
-    public int getNumberOfCharacters() {
+    public long getNumberOfCharacters() {
         return numberOfCharacters;
     }
 }
